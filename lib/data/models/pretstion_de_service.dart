@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class PerstationDeService  extends Equatable{
+  final String id;
   final String nom;
   final String email;
   final String image;
@@ -9,12 +10,13 @@ class PerstationDeService  extends Equatable{
   final String telephone;
   final String localisation;
 
-  const PerstationDeService({required this.nom,required this.email,required this.image,
+  const PerstationDeService({required this.id,required this.nom,required this.email,required this.image,
     required this.type_service,required this.telephone,required this.localisation});
 
   @override
 
   List<Object?> get props => [
+    id,
     nom,
     email,
     image,

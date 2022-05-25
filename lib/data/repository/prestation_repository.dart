@@ -8,9 +8,10 @@ import 'base_prestation_repository.dart';
 
 class PrestationRepository extends BasePrestationRepository {
   final Category categorie;
+  final PerstationDeService perstationDeService;
   final FirebaseFirestore _firebaseFirestore;
 
-  PrestationRepository({FirebaseFirestore? firebaseFirestore , required this.categorie})
+  PrestationRepository({FirebaseFirestore? firebaseFirestore , required this.categorie,required this.perstationDeService})
       : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
 
 
@@ -21,10 +22,12 @@ class PrestationRepository extends BasePrestationRepository {
         .collection("categories")
         .doc(categorie.id)
         .collection("prestation_service")
+        //.doc(perstationDeService.id)
         .snapshots()
         .map((snapshot) {
       return snapshot.docs.map((doc) {
         return PerstationDeService(
+          id: doc.id,
           nom: doc.get('nom'),
           email: doc.get('email'),
           telephone: doc.get('telephone'),

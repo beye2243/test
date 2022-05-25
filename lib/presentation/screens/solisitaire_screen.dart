@@ -1,6 +1,11 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../helpers/theme_helper.dart';
 import '../widgets/header_widget.dart';
@@ -14,9 +19,50 @@ class SolisitaireScreen extends StatefulWidget {
 
 class _SolisitaireScreenState extends State<SolisitaireScreen> {
   final _formKey = GlobalKey<FormState>();
+  final items = ["Electriciter","plombier","profeseur"];
+  String? value ;
   bool checkedValue = false;
   bool checkboxValue = false;
-  @override
+
+  DropdownMenuItem<String> buildMenuItems(String item ) => DropdownMenuItem(
+    value: item,
+    child: Text(
+      item,
+      style: TextStyle(fontSize:15 ,color: Colors.grey[600] ),
+    ),
+  ) ;
+  void showCarDialog(BuildContext context, ImageSource source) async {
+    XFile? _pickedFile = await ImagePicker().pickImage(source: source);
+    File _file = File(_pickedFile!.path);
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+      final mobilHeight = MediaQuery.of(context).size.height * 0.25;
+      final webHeight = MediaQuery.of(context).size.height * 0.5;
+      return SimpleDialog(
+        contentPadding: EdgeInsets.zero,
+        children: [
+      Container(
+      height: kIsWeb ? webHeight : mobilHeight,
+        margin: EdgeInsets.all(8.0),
+        color: Colors.grey,
+        child: kIsWeb
+            ? Image(
+          image: NetworkImage(_file.path),
+          fit: BoxFit.cover,
+        )
+            : Image(
+          image: FileImage(_file),
+          fit: BoxFit.cover,
+        ),
+      ),
+        ],
+    );
+        });
+        }
+
+
+        @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -25,7 +71,7 @@ class _SolisitaireScreenState extends State<SolisitaireScreen> {
           children: [
             Container(
               height: 150,
-              child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
+              child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded)
             ),
             Container(
               margin: EdgeInsets.fromLTRB(25, 50, 25, 10),
@@ -61,9 +107,11 @@ class _SolisitaireScreenState extends State<SolisitaireScreen> {
                                   size: 80.0,
                                 ),
                               ),
-                              Container(
+                              IconButton(
                                 padding: EdgeInsets.fromLTRB(80, 80, 0, 0),
-                                child: Icon(
+                                onPressed: (){
+                                },
+                                icon: Icon(
                                   Icons.add_circle,
                                   color: Colors.grey.shade700,
                                   size: 25.0,
@@ -75,25 +123,19 @@ class _SolisitaireScreenState extends State<SolisitaireScreen> {
                         SizedBox(height: 30,),
                         Container(
                           child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration('First Name', 'Enter your first name'),
+                            decoration: ThemeHelper().textInputDecoration('Nom', 'Entrez votre nom '),
                           ),
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         ),
-                        SizedBox(height: 30,),
+                        SizedBox(height: 20,),
+
                         Container(
                           child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration('Last Name', 'Enter your last name'),
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                        ),
-                        SizedBox(height: 20.0),
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration("E-mail address", "Enter your email"),
+                            decoration: ThemeHelper().textInputDecoration(" address E-mail", "Entrez votre Email"),
                             keyboardType: TextInputType.emailAddress,
                             validator: (val) {
                               if(!(val!.isEmpty) && !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$").hasMatch(val)){
-                                return "Enter a valid email address";
+                                return "entrez un adresse email valider ";
                               }
                               return null;
                             },
@@ -104,12 +146,12 @@ class _SolisitaireScreenState extends State<SolisitaireScreen> {
                         Container(
                           child: TextFormField(
                             decoration: ThemeHelper().textInputDecoration(
-                                "Mobile Number",
-                                "Enter your mobile number"),
+                                "Telephone",
+                                "Entrez votre numro de telephone"),
                             keyboardType: TextInputType.phone,
                             validator: (val) {
                               if(!(val!.isEmpty) && !RegExp(r"^(\d+)*$").hasMatch(val)){
-                                return "Enter a valid phone number";
+                                return "entrez un numero de telephone email valider";
                               }
                               return null;
                             },
@@ -119,56 +161,34 @@ class _SolisitaireScreenState extends State<SolisitaireScreen> {
                         SizedBox(height: 20.0),
                         Container(
                           child: TextFormField(
-                            obscureText: true,
-                            decoration: ThemeHelper().textInputDecoration(
-                                "Password*", "Enter your password"),
-                            validator: (val) {
-                              if (val!.isEmpty) {
-                                return "Please enter your password";
-                              }
-                              return null;
-                            },
+                            decoration: ThemeHelper().textInputDecoration('localisation', 'Entrez votre localisation '),
                           ),
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         ),
-                        SizedBox(height: 15.0),
-                        FormField<bool>(
-                          builder: (state) {
-                            return Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Checkbox(
-                                        value: checkboxValue,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            checkboxValue = value!;
-                                            state.didChange(value);
-                                          });
-                                        }),
-                                    Text("I accept all terms and conditions.", style: TextStyle(color: Colors.grey),),
-                                  ],
-                                ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    state.errorText ?? '',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(color: Theme.of(context).errorColor,fontSize: 12,),
-                                  ),
-                                )
-                              ],
-                            );
-                          },
-                          validator: (value) {
-                            if (!checkboxValue) {
-                              return 'You need to accept terms and conditions';
-                            } else {
-                              return null;
-                            }
-                          },
+                        SizedBox(height: 30.0),
+                        Container(
+
+                          height: 50 ,
+                          padding: EdgeInsets.symmetric(horizontal: 12,vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(30),
+                            border: Border.all(color: Colors.grey,width:1),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value:value,
+                              isExpanded: true,
+                              iconSize: 35,
+                              dropdownColor: Colors.white,
+                              icon: Icon(Icons.arrow_drop_down,color: Colors.black,),
+                              items: items.map(buildMenuItems).toList() ,
+                              onChanged: (value)=> setState(() => this.value = value),
+                            ),
+                          ),
                         ),
                         SizedBox(height: 20.0),
+
                         Container(
                           decoration: ThemeHelper().buttonBoxDecoration(context),
                           child: ElevatedButton(
@@ -198,71 +218,7 @@ class _SolisitaireScreenState extends State<SolisitaireScreen> {
 
                           ),
                         ),
-                        SizedBox(height: 30.0),
-                        Text("Or create account using social media",  style: TextStyle(color: Colors.grey),),
-                        SizedBox(height: 25.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              child: FaIcon(
-                                FontAwesomeIcons.googlePlus, size: 35,
-                                color: HexColor("#EC2D2F"),),
-                              onTap: () {
-                                setState(() {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return ThemeHelper().alartDialog("Google Plus","You tap on GooglePlus social icon.",context);
-                                    },
-                                  );
-                                });
-                              },
-                            ),
-                            SizedBox(width: 30.0,),
-                            GestureDetector(
-                              child: Container(
-                                padding: EdgeInsets.all(0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(width: 5, color: HexColor("#40ABF0")),
-                                  color: HexColor("#40ABF0"),
-                                ),
-                                child: FaIcon(
-                                  FontAwesomeIcons.twitter, size: 23,
-                                  color: HexColor("#FFFFFF"),),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return ThemeHelper().alartDialog("Twitter","You tap on Twitter social icon.",context);
-                                    },
-                                  );
-                                });
-                              },
-                            ),
-                            SizedBox(width: 30.0,),
-                            GestureDetector(
-                              child: FaIcon(
-                                FontAwesomeIcons.facebook, size: 35,
-                                color: HexColor("#3E529C"),),
-                              onTap: () {
-                                setState(() {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return ThemeHelper().alartDialog("Facebook",
-                                          "You tap on Facebook social icon.",
-                                          context);
-                                    },
-                                  );
-                                });
-                              },
-                            ),
-                          ],
-                        ),
+
                       ],
                     ),
                   ),
@@ -273,5 +229,9 @@ class _SolisitaireScreenState extends State<SolisitaireScreen> {
         ),
       ),
     );
+
+
+
+
   }
 }

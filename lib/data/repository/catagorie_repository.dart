@@ -26,26 +26,6 @@ class CategoryRepository extends BaseCategoryRepository {
 
     });
   }
-  Stream<List<PerstationDeService>> getAllPersonnes(Category categorieID) {
-    return _firebaseFirestore
-        .collection("categories")
-        .doc(categorieID.id)
-        .collection("prestation_service")
-        .snapshots()
-        .map((snapshot) {
-      return snapshot.docs.map((doc) {
-        return PerstationDeService(
-          nom: doc.get('nom'),
-          email: doc.get('email'),
-          telephone: doc.get('telephone'),
-          image: doc.get('image'),
-          type_service: doc.get('type_service'),
-          localisation: doc.get('localisation'),
 
-        );
-      }).toList();
-
-    });
-  }
 
 }

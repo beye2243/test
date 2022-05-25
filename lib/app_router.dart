@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:test/presentation/screens/home_screen.dart';
 import 'package:test/presentation/screens/otp_screen.dart';
+import 'package:test/presentation/screens/personneDetail_Screen.dart';
 import 'package:test/presentation/screens/personne_screen.dart';
 import 'package:test/presentation/screens/prestation_Screen.dart';
 import 'package:test/presentation/screens/solisitaire_screen.dart';
@@ -88,6 +89,18 @@ class AppRouter {
                 CategoryCubit(CategoryRepository()),
             child: PersonneScreen(
               categorie: categorie ,
+            ),
+          ),
+        );
+
+      case personneDetail_Screen:
+        final categorie = settings.arguments as Category;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (BuildContext context) =>
+                CategoryCubit(CategoryRepository()),
+            child: PersonneDetailScreen(
+              categorie: categorie,
             ),
           ),
         );

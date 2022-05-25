@@ -3,6 +3,7 @@ const otpScreen = '/otp-screen';
 const homeScreen = '/home-screen';
 const prestation_Screen = '/prestation-Screen';
 const solisitaire_Screen = '/solisitaire-Screen';
+const personneDetail_Screen = '/personneDetail_Screen';
 const personne_Screen = '/personne_Screen';
 
 

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:test/data/models/pretstion_de_service.dart';
 
 import '../../constnats/my_colors.dart';
+import '../../constnats/strings.dart';
 import '../../data/models/catagorie.dart';
 import '../../data/repository/catagorie_repository.dart';
 
@@ -23,25 +24,7 @@ class _PersonneScreenState extends State<PersonneScreen> {
   final db=FirebaseFirestore.instance;
 
 
-  // CollectionReference prestation = FirebaseFirestore.instance
-  //     .collection("categories").doc("0KKmCcJnwO2gt0HVQKN7").collection("prestation_service");
-  List names = [
-    "finefde",
-    "gfdhhyjh",
-    "ahmedali",
-    "moulaye sidi",
-    "zaid",
-    "erfdg",
-    "vatu"
-  ];
-  List designations = [
-    "programer",
-    "data scientist",
-    "project manager",
-    "designer",
-    "developer",
-    "plomier","chef"
-  ];
+
 
   _PersonneScreenState(this.categorie);
   @override
@@ -72,6 +55,7 @@ class _PersonneScreenState extends State<PersonneScreen> {
             var  doc = snapshot.data?.docs;
             return Container(
               color: Colors.grey[700],
+
               child: new ListView.builder(
                 itemCount: doc?.length,
                 shrinkWrap: true,
@@ -139,7 +123,10 @@ class _PersonneScreenState extends State<PersonneScreen> {
                             alignment: Alignment.center,
                             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                             child: FlatButton(
-                              onPressed: (){},
+                              onPressed: (){
+                                 Navigator.pushNamed(context, personneDetail_Screen,arguments: categorie);
+
+                              },
                               color: Colors.yellow[800],
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),

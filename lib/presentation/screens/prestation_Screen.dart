@@ -124,7 +124,7 @@ class _PresationScreenState extends State<PresationScreen> {
   Widget buildLoadedListWidgets() {
     return SingleChildScrollView(
       child: Container(
-        color: MyColors.myGrey,
+        color: Colors.white,
         child: Column(
           children: [
             buildCharactersList(),

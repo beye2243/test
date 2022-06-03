@@ -93,17 +93,17 @@ class AppRouter {
           ),
         );
 
-      case personneDetail_Screen:
-        final categorie = settings.arguments as Category;
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (BuildContext context) =>
-                CategoryCubit(CategoryRepository()),
-            child: PersonneDetailScreen(
-              categorie: categorie,
-            ),
-          ),
-        );
+      // case personneDetail_Screen:
+      //   final categorie = settings.arguments as Category;
+      //   return MaterialPageRoute(
+      //     builder: (_) => BlocProvider(
+      //       create: (BuildContext context) =>
+      //           CategoryCubit(CategoryRepository()),
+      //       child: PersonneDetailScreen(
+      //         categorie: categorie,
+      //       ),
+      //     ),
+      //   );
 
 
 

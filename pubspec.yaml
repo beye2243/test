@@ -40,6 +40,7 @@ dependencies:
   otp_text_field: ^1.1.1
   firebase_storage: ^10.0.1
   image_picker: ^0.8.3+2
+  file_picker: ^4.6.0
   flutter:
     sdk: flutter
 
@@ -50,8 +51,23 @@ dependencies:
 
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.9.2"
+  flutter_native_splash: ^1.2.1
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.jpg"
+
+flutter_native_splash:
+  android: true
+  ios: true
+  web: true
+  color: "#42a5f5"
+  image: assets/images/logo (2).png
+  android_gravity: fill
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

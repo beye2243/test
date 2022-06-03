@@ -69,7 +69,7 @@ class LoginScreen extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
             decoration: BoxDecoration(
-              border: Border.all(color: MyColors.blue),
+              border: Border.all(color: Colors.white),
               borderRadius: const BorderRadius.all(Radius.circular(6)),
             ),
             child: TextFormField(
@@ -130,13 +130,13 @@ class LoginScreen extends StatelessWidget {
         },
         child: const Text(
           'Suivant',
-          style: TextStyle(color: Colors.white, fontSize: 16),
+          style: TextStyle(color: Colors.black, fontSize: 16),
         ),
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(110, 50),
-          primary: Colors.black,
+          primary: Colors.yellow[800],
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(20),
           ),
         ),
       ),
@@ -199,10 +199,11 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey,
         body: Form(
           key: _phoneFormKey,
           child: Container(
+
             margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 88),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

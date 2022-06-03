@@ -17,6 +17,7 @@ class CategoryItem extends StatelessWidget {
       margin: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
       padding: EdgeInsetsDirectional.all(4),
       decoration: BoxDecoration(
+
         color: MyColors.myWhite,
         borderRadius: BorderRadius.circular(8),
       ),
@@ -42,7 +43,7 @@ class CategoryItem extends StatelessWidget {
           footer: Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            color: Colors.black54,
+            color: Colors.teal[300],
             alignment: Alignment.bottomCenter,
             child: Text(
               '${category.name}',

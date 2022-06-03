@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:test/data/models/pretstion_de_service.dart';
+import 'package:test/presentation/screens/personneDetail_Screen.dart';
 
 import '../../constnats/my_colors.dart';
 import '../../constnats/strings.dart';
@@ -36,11 +37,11 @@ class _PersonneScreenState extends State<PersonneScreen> {
           RichText(
             text: TextSpan(
               text: 'Liste de persone de ',
-              style: const TextStyle(color: Colors.black, fontSize: 18, height: 1.4),
+              style: const TextStyle(color: Colors.white, fontSize: 18, height: 1.4),
               children: <TextSpan>[
                 TextSpan(
                   text: '${categorie.name}',
-                  style: const TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.black38),
                 ),
               ],
             ),
@@ -54,8 +55,7 @@ class _PersonneScreenState extends State<PersonneScreen> {
           if(snapshot.hasData){
             var  doc = snapshot.data?.docs;
             return Container(
-              color: Colors.grey[700],
-
+              color: Colors.white,
               child: new ListView.builder(
                 itemCount: doc?.length,
                 shrinkWrap: true,
@@ -124,10 +124,17 @@ class _PersonneScreenState extends State<PersonneScreen> {
                             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                             child: FlatButton(
                               onPressed: (){
-                                 Navigator.pushNamed(context, personneDetail_Screen,arguments: categorie);
+
+                                 Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                 builder:(context)=>
+                                PersonneDetailScreen(id: doc?[index].id,categorie: categorie)
+                                 )
+                                 );
 
                               },
-                              color: Colors.yellow[800],
+                              color: Colors.teal[800],
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
                               ),

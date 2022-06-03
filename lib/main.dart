@@ -38,10 +38,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: Colors.yellow[800],
-        accentColor: Colors.grey[700],
-        scaffoldBackgroundColor: Colors.grey[600],
-        primarySwatch: Colors.grey,
+        primaryColor: Colors.teal,
+        accentColor: Colors.black,
+        scaffoldBackgroundColor: Colors.white,
+      //  primarySwatch: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
 

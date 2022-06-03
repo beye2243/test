@@ -71,6 +71,7 @@ class OtpScreen extends StatelessWidget {
 
   Widget _buildPinCodeFields(BuildContext context) {
     return Container(
+      color: Colors.grey,
       child: PinCodeTextField(
         appContext: context,
         autoFocus: true,
@@ -85,15 +86,15 @@ class OtpScreen extends StatelessWidget {
           fieldHeight: 50,
           fieldWidth: 40,
           borderWidth: 1,
-          activeColor: MyColors.blue,
-          inactiveColor: MyColors.blue,
+          activeColor: Colors.white,
+          inactiveColor: Colors.white,
           inactiveFillColor: Colors.white,
           activeFillColor: MyColors.lightBlue,
-          selectedColor: MyColors.blue,
+          selectedColor: Colors.white,
           selectedFillColor: Colors.white,
         ),
         animationDuration: const Duration(milliseconds: 300),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey,
         enableActiveFill: true,
         onCompleted: (submitedCode) {
           otpCode = submitedCode;
@@ -121,13 +122,13 @@ class OtpScreen extends StatelessWidget {
         },
         child: const Text(
           'Verification',
-          style: TextStyle(color: Colors.white, fontSize: 16),
+          style: TextStyle(color: Colors.black, fontSize: 16),
         ),
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(110, 50),
-          primary: Colors.black,
+          primary: Colors.yellow[800],
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(20),
           ),
         ),
       ),
@@ -169,7 +170,7 @@ class OtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey,
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 88),
           child: Column(
